@@ -42,7 +42,7 @@
                                                     <binding destination="-2" name="value" keyPath="self.icon" id="mlk-Yq-3oc"/>
                                                 </connections>
                                             </imageView>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="3lN-WN-WTb">
+                                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="3lN-WN-WTb">
                                                 <rect key="frame" x="152" y="74" width="56" height="26"/>
                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" title="Label" id="gxz-cu-iuz">
                                                     <font key="font" textStyle="title1" name=".SFNS-Regular"/>
@@ -90,7 +90,7 @@
                                                     <binding destination="-2" name="value" keyPath="self.progress.value" previousBinding="Alc-oR-Nie" id="J3y-oD-vDm"/>
                                                 </connections>
                                             </progressIndicator>
-                                            <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="q3e-12-dTV">
+                                            <textField wantsLayer="YES" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="q3e-12-dTV">
                                                 <rect key="frame" x="162" y="0.0" width="37" height="16"/>
                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" title="Label" id="wL1-Go-juk">
                                                     <font key="font" metaFont="system"/>
@@ -140,7 +140,7 @@
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="Smb-AG-XrS">
                                 <rect key="frame" x="20" y="20" width="360" height="20"/>
                                 <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4pw-0X-kuQ">
+                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4pw-0X-kuQ">
                                         <rect key="frame" x="-2" y="2" width="51" height="16"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Format:" id="Dzg-Hj-BbO">
                                             <font key="font" usesAppearanceFont="YES"/>
@@ -164,6 +164,11 @@
                                             </menu>
                                         </popUpButtonCell>
                                         <connections>
+                                            <binding destination="-2" name="enabled" keyPath="self.loading" id="qtL-6w-Bfd">
+                                                <dictionary key="options">
+                                                    <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                </dictionary>
+                                            </binding>
                                             <binding destination="-2" name="selectedTag" keyPath="self.format" id="t1c-ka-Oyk"/>
                                         </connections>
                                     </popUpButton>
@@ -178,6 +183,11 @@ DQ
                                         </buttonCell>
                                         <connections>
                                             <action selector="convert:" target="-2" id="jDf-vc-bcL"/>
+                                            <binding destination="-2" name="enabled" keyPath="self.loading" id="gxC-0s-ThX">
+                                                <dictionary key="options">
+                                                    <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                </dictionary>
+                                            </binding>
                                         </connections>
                                     </button>
                                 </subviews>
