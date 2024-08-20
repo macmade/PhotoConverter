@@ -29,7 +29,7 @@ import UniformTypeIdentifiers
 public class MainWindowController: NSWindowController
 {
     @objc private dynamic var url:      URL
-    @objc private dynamic var name:     String
+    @objc private dynamic var name:     String?
     @objc private dynamic var icon:     NSImage?
     @objc private dynamic var info:     String?
     @objc private dynamic var progress: Progress?
@@ -37,6 +37,8 @@ public class MainWindowController: NSWindowController
     @objc private dynamic var format  = 0
 
     private var images: [ URL ] = []
+
+    @IBOutlet private var dropView: DropView?
 
     private enum ImageFormat: Int
     {
@@ -50,8 +52,6 @@ public class MainWindowController: NSWindowController
     public init( url: URL )
     {
         self.url  = url
-        self.name = url.lastPathComponent
-        self.icon = NSWorkspace.shared.icon( forFile: url.path( percentEncoded: false ) )
 
         super.init( window: nil )
     }
@@ -71,7 +71,23 @@ public class MainWindowController: NSWindowController
         super.windowDidLoad()
         self.loadImages()
 
-        self.window?.title = "Photo Converter - \( self.name )"
+        if let view = self.dropView
+        {
+            view.onDrop =
+            {
+                guard self.loading == false
+                else
+                {
+                    NSSound.beep()
+
+                    return
+                }
+
+                self.url = $0
+
+                self.loadImages()
+            }
+        }
     }
 
     private func showError( message: String, closeWindow: Bool )
@@ -112,8 +128,12 @@ public class MainWindowController: NSWindowController
 
     private func loadImages()
     {
-        self.loading = true
-        self.info    = "Loading Images - Please Wait..."
+        self.images        = []
+        self.window?.title = "Photo Converter - \( self.url.lastPathComponent )"
+        self.name          = self.url.lastPathComponent
+        self.icon          = NSWorkspace.shared.icon( forFile: self.url.path( percentEncoded: false ) )
+        self.loading       = true
+        self.info          = "Loading Images - Please Wait..."
 
         DispatchQueue.global( qos: .userInitiated ).async
         {

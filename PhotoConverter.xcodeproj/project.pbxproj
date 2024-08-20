@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		051A78A22C70D993006328DF /* GitHubUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051A78A12C70D993006328DF /* GitHubUpdater.swift */; };
 		055FBBA72C6F82B7003B51AC /* NSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055FBBA62C6F82B7003B51AC /* NSView.swift */; };
+		0562F8ED2C7555030012CC94 /* DropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0562F8EC2C7555030012CC94 /* DropView.swift */; };
 		05646BB42685020A00707676 /* ApplicationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05646BAF2685020A00707676 /* ApplicationDelegate.swift */; };
 		05646BB52685020A00707676 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05646BB12685020A00707676 /* MainMenu.xib */; };
 		05646BEF2685055F00707676 /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05646BEE2685055F00707676 /* AboutWindowController.swift */; };
@@ -37,6 +38,7 @@
 /* Begin PBXFileReference section */
 		051A78A12C70D993006328DF /* GitHubUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubUpdater.swift; sourceTree = "<group>"; };
 		055FBBA62C6F82B7003B51AC /* NSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSView.swift; sourceTree = "<group>"; };
+		0562F8EC2C7555030012CC94 /* DropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropView.swift; sourceTree = "<group>"; };
 		05646B9A268501B300707676 /* Photo Converter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Photo Converter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05646BA4268501B400707676 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05646BA5268501B400707676 /* PhotoConverter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PhotoConverter.entitlements; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				05646BF02685058700707676 /* AboutWindowController.xib */,
 				05646BAF2685020A00707676 /* ApplicationDelegate.swift */,
 				05B999942C6F268E00DF4C08 /* BytesToString.swift */,
+				0562F8EC2C7555030012CC94 /* DropView.swift */,
 				051A78A12C70D993006328DF /* GitHubUpdater.swift */,
 				05B999762C6ED45500DF4C08 /* MainWindowController.swift */,
 				05B9997B2C6ED4BD00DF4C08 /* MainWindowController.xib */,
@@ -396,6 +399,7 @@
 				05B999772C6ED45500DF4C08 /* MainWindowController.swift in Sources */,
 				05F479B12C753A74008B5671 /* Progress.swift in Sources */,
 				05B9997F2C6ED8D000DF4C08 /* RuntimeError.swift in Sources */,
+				0562F8ED2C7555030012CC94 /* DropView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
