@@ -277,13 +277,13 @@ public class MainWindowController: NSWindowController
                     }
                 }
 
-                operation.qualityOfService = .userInteractive
+                operation.qualityOfService = .userInitiated
 
                 return operation
             }
 
             let queue                         = OperationQueue()
-            queue.qualityOfService            = .userInteractive
+            queue.qualityOfService            = .userInitiated
             queue.maxConcurrentOperationCount = 20
 
             queue.addOperations( operations, waitUntilFinished: true )
