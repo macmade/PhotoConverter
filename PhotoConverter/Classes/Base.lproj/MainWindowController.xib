@@ -224,6 +224,9 @@ DQ
                     <constraint firstItem="dve-xt-hvi" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" id="kyE-cQ-q1m"/>
                 </constraints>
             </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="yju-9V-8Ct"/>
+            </connections>
             <point key="canvasLocation" x="377" y="161"/>
         </window>
     </objects>

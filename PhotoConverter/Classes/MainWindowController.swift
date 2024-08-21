@@ -26,7 +26,7 @@ import Cocoa
 import UniformTypeIdentifiers
 
 @objc
-public class MainWindowController: NSWindowController
+public class MainWindowController: NSWindowController, NSWindowDelegate
 {
     @objc private dynamic var url:      URL
     @objc private dynamic var name:     String?
@@ -37,8 +37,11 @@ public class MainWindowController: NSWindowController
     @objc private dynamic var format  = 0
 
     private var images: [ URL ] = []
+    private let queue           = OperationQueue()
 
     @IBOutlet private var dropView: DropView?
+
+    public var onClose: ( () -> Void )?
 
     private enum ImageFormat: Int
     {
@@ -71,6 +74,9 @@ public class MainWindowController: NSWindowController
         super.windowDidLoad()
         self.loadImages()
 
+        self.queue.qualityOfService            = .userInitiated
+        self.queue.maxConcurrentOperationCount = 20
+
         if let view = self.dropView
         {
             view.onDrop =
@@ -88,6 +94,43 @@ public class MainWindowController: NSWindowController
                 self.loadImages()
             }
         }
+    }
+
+    public func windowCanBeClosed() -> Bool
+    {
+        guard self.loading
+        else
+        {
+            return true
+        }
+
+        let alert             = NSAlert()
+        alert.messageText     = "Operations in Progress"
+        alert.informativeText = "Are you sure you really want to close this window?\n\nThis will abort all running operations."
+
+        alert.addButton( withTitle: "Cancel" )
+        alert.addButton( withTitle: "Close Anyway" )
+
+        if alert.runModal() == .alertFirstButtonReturn
+        {
+            return false
+        }
+        else
+        {
+            self.queue.cancelAllOperations()
+
+            return true
+        }
+    }
+
+    public func windowShouldClose( _ sender: NSWindow ) -> Bool
+    {
+        self.windowCanBeClosed()
+    }
+
+    public func windowWillClose( _ notification: Notification )
+    {
+        self.onClose?()
     }
 
     private func showError( message: String, closeWindow: Bool )
@@ -282,11 +325,7 @@ public class MainWindowController: NSWindowController
                 return operation
             }
 
-            let queue                         = OperationQueue()
-            queue.qualityOfService            = .userInitiated
-            queue.maxConcurrentOperationCount = 20
-
-            queue.addOperations( operations, waitUntilFinished: true )
+            self.queue.addOperations( operations, waitUntilFinished: true )
 
             DispatchQueue.main.async
             {

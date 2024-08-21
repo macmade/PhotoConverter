@@ -87,24 +87,29 @@ public class ApplicationDelegate: NSObject, NSApplicationDelegate, NSWindowDeleg
             return
         }
 
-        let controller              = MainWindowController( url: url )
-        controller.window?.delegate = self
+        let controller     = MainWindowController( url: url )
+        controller.onClose =
+        {
+            [ weak self ] in self?.windowControllers.removeAll
+            {
+                $0 === controller
+            }
+        }
 
         self.windowControllers.append( controller )
         controller.window?.makeKeyAndOrderFront( sender )
     }
 
-    public func windowWillClose( _ notification: Notification )
+    public func applicationShouldTerminate( _ sender: NSApplication ) -> NSApplication.TerminateReply
     {
-        guard let window = notification.object as? NSWindow
-        else
+        for controller in self.windowControllers
         {
-            return
+            if controller.windowCanBeClosed() == false
+            {
+                return .terminateCancel
+            }
         }
 
-        self.windowControllers.removeAll
-        {
-            $0.window === window
-        }
+        return .terminateNow
     }
 }
