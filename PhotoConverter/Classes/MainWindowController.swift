@@ -1,7 +1,7 @@
 /*******************************************************************************
  * The MIT License (MIT)
  *
- * Copyright (c) 2023, Jean-David Gadina - www.xs-labs.com
+ * Copyright (c) 2025, Jean-David Gadina - www.xs-labs.com
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the Software), to deal
@@ -370,6 +370,18 @@ public class MainWindowController: NSWindowController, NSWindowDelegate
                 if CGImageDestinationFinalize( writer ) == false
                 {
                     throw RuntimeError( message: "Cannot write image: \( destination.lastPathComponent )" )
+                }
+
+                let attributes = try FileManager.default.attributesOfItem( atPath: url.path( percentEncoded: false ) )
+
+                if let creationDate = attributes[ .creationDate ] as? Date
+                {
+                    try FileManager.default.setAttributes( [ .creationDate: creationDate ], ofItemAtPath: destination.path( percentEncoded: false ) )
+                }
+
+                if let modificationDate = attributes[ .modificationDate ] as? Date
+                {
+                    try FileManager.default.setAttributes( [ .modificationDate: modificationDate ], ofItemAtPath: destination.path( percentEncoded: false ) )
                 }
             }
         }
